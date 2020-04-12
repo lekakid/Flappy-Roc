@@ -59,12 +59,7 @@ public class GameManager : MonoBehaviour
 
     public void Play() {
         _state = StateType.PLAY;
-
-        _score = 0;
-        Roc.Init();
-        GateRotator.Init();
         PlayView.ShowPauseButton(true);
-        
     }
 
     public void Pause() {
@@ -77,12 +72,22 @@ public class GameManager : MonoBehaviour
         PauseView.SetActive(false);
     }
 
+    public void Restart() {
+        _state = StateType.PAUSE;
+
+        _score = 0;
+        Roc.Init();
+        GateRotator.Init();
+        PlayView.ShowScore(true);
+        GameOverView.gameObject.SetActive(false);
+    }
+
     public void GameOver() {
         _state = StateType.PAUSE;
         _highScore = (_score > _highScore) ? _score : _highScore;
 
+        PlayView.ShowScore(false);
         PlayView.ShowPauseButton(false);
-        PlayView.HideScore();
         GameOverView.gameObject.SetActive(true);
     }
 

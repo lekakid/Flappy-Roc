@@ -22,7 +22,7 @@ public class PlayView : MonoBehaviour
         animator.SetBool("ShowPauseButton", active);
     }
 
-    public void HideScore() {
-        animator.SetTrigger("HideScore");
+    public void ShowScore(bool active) {
+        animator.SetBool("ShowScore", active);
     }
 }
