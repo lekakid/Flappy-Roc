@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
 
     public void Play() {
         _state = StateType.PLAY;
-        PlayView.ShowPauseButton(true);
+        PlayView.Show(true);
     }
 
     public void Pause() {
@@ -80,7 +80,6 @@ public class GameManager : MonoBehaviour
         
         _score = 0;
 
-        PlayView.ShowScore(true);
         GameOverView.gameObject.SetActive(false);
     }
 
@@ -89,8 +88,7 @@ public class GameManager : MonoBehaviour
 
         _highScore = (_score > _highScore) ? _score : _highScore;
 
-        PlayView.ShowScore(false);
-        PlayView.ShowPauseButton(false);
+        PlayView.Show(false);
         GameOverView.gameObject.SetActive(true);
     }
 

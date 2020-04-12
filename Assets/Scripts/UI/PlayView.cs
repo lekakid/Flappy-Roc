@@ -18,11 +18,8 @@ public class PlayView : MonoBehaviour
         txtScore.text = string.Format("{0}", score);
     }
 
-    public void ShowPauseButton(bool active) {
-        animator.SetBool("ShowPauseButton", active);
-    }
-
-    public void ShowScore(bool active) {
+    public void Show(bool active) {
         animator.SetBool("ShowScore", active);
+        animator.SetBool("ShowPauseButton", active);
     }
 }
