@@ -35,7 +35,7 @@ public class Roc : MonoBehaviour
             _isReadyState = false;
         }
 
-        if(GameManager.Instance.CurrentState == GameManager.StateType.PLAY)
+        if(GameManager.Instance.State == GameManager.StateType.PLAY)
             _rigidbody.velocity = Vector2.up * FlyForce;
     }
 

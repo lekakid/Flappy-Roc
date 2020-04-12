@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
         get { return _instance; }
     }
 
-    public StateType CurrentState {
+    public StateType State {
         get { return _state; }
         set { _state = value; }
     }
@@ -75,15 +75,18 @@ public class GameManager : MonoBehaviour
     public void Restart() {
         _state = StateType.PAUSE;
 
-        _score = 0;
         Roc.Init();
         GateRotator.Init();
+        
+        _score = 0;
+
         PlayView.ShowScore(true);
         GameOverView.gameObject.SetActive(false);
     }
 
     public void GameOver() {
         _state = StateType.PAUSE;
+
         _highScore = (_score > _highScore) ? _score : _highScore;
 
         PlayView.ShowScore(false);

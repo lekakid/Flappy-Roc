@@ -962,8 +962,9 @@ GameObject:
   - component: {fileID: 572335859}
   - component: {fileID: 572335858}
   - component: {fileID: 572335860}
+  - component: {fileID: 572335861}
   m_Layer: 0
-  m_Name: Land Tile
+  m_Name: Land
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1058,6 +1059,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 10, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &572335861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 572335857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 676362e7dadab1246a97d2d8a03bd04e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &776656702
 GameObject:
   m_ObjectHideFlags: 0

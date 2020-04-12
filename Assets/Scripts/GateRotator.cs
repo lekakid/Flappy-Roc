@@ -18,7 +18,7 @@ public class GateRotator : MonoBehaviour
         _accTime += Time.deltaTime;
 
         if(_accTime > Delay) {
-            _accTime -= Delay;
+            _accTime = 0f;
 
             foreach(Gate g in Gates) {
                 if(g.isRunning)
