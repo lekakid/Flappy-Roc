@@ -60,6 +60,7 @@ public class GameManager : MonoBehaviour
     public void Play() {
         _state = StateType.PLAY;
         PlayView.Show(true);
+        PlayView.ShowLight(false);
     }
 
     public void Pause() {
@@ -80,6 +81,7 @@ public class GameManager : MonoBehaviour
         
         _score = 0;
         PlayView.SetScoreText(_score);
+        PlayView.ShowLight(true);
 
         GameOverView.gameObject.SetActive(false);
     }

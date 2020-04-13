@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class PlayView : MonoBehaviour
 {
     public Text txtScore;
+    public GameObject imgLight;
+    public GameObject imgTouch;
 
     Animator animator;
 
@@ -21,5 +23,10 @@ public class PlayView : MonoBehaviour
     public void Show(bool active) {
         animator.SetBool("ShowScore", active);
         animator.SetBool("ShowPauseButton", active);
+    }
+
+    public void ShowLight(bool active) {
+        imgLight.SetActive(active);
+        imgTouch.SetActive(active);
     }
 }
