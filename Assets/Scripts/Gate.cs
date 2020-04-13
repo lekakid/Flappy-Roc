@@ -63,7 +63,7 @@ public class Gate : MonoBehaviour
         _downSideCollider.size = new Vector2(_downSideCollider.size.x, downSideHeight);
         _downSideSpriteRenderer.size = new Vector2(_downSideSpriteRenderer.size.x, downSideHeight);
 
-        _gateCollider.offset = new Vector2(0, landHeight + downSideHeight + gateHeight / 2f);
+        _gateCollider.offset = new Vector2(_gateCollider.offset.x, landHeight + downSideHeight + gateHeight / 2f);
 
         UpSide.transform.position = new Vector2(UpSide.transform.position.x, landHeight + downSideHeight + gateHeight + upSideHeight / 2f);
         _upSideCollider.size = new Vector2(_upSideCollider.size.x, upSideHeight);

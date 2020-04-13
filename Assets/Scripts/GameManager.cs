@@ -79,6 +79,7 @@ public class GameManager : MonoBehaviour
         GateRotator.Init();
         
         _score = 0;
+        PlayView.SetScoreText(_score);
 
         GameOverView.gameObject.SetActive(false);
     }

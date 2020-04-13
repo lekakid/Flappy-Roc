@@ -44,10 +44,7 @@ public class Roc : MonoBehaviour
         if(other.CompareTag("Wall")) {
             GameManager.Instance.GameOver();
         }
-    }
 
-    void OnTriggerExit2D(Collider2D other)
-    {
         if(other.CompareTag("Gate")) {
             GameManager.Instance.GetScore();
         }
