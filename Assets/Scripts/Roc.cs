@@ -8,7 +8,6 @@ public class Roc : MonoBehaviour
     public float Speed;
 
     Rigidbody2D _rigidbody;
-    bool _isReadyState = true;
     Vector2 _DefaultPosition;
 
     void Awake()
@@ -25,14 +24,12 @@ public class Roc : MonoBehaviour
     }
 
     public void Init() {
-        _isReadyState = true;
         transform.position = _DefaultPosition;
     }
 
     public void Fly() {
-        if(_isReadyState) {
+        if(GameManager.Instance.State == GameManager.StateType.INIT) {
             GameManager.Instance.Play();
-            _isReadyState = false;
         }
 
         if(GameManager.Instance.State == GameManager.StateType.PLAY)
