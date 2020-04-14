@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     public GameObject PauseView;
     public GameOverView GameOverView;
 
+    [Header("Value")]
+    public int MedalScore = 200;
+
     #region Property
     public static GameManager Instance {
         get { return _instance; }
@@ -30,13 +33,15 @@ public class GameManager : MonoBehaviour
 
     #region Variable
     public enum StateType {
+        INIT,
         PLAY,
-        PAUSE
+        PAUSE,
+        GAMEOVER
     }
     static GameManager _instance;
-    StateType _state = StateType.PAUSE;
+    StateType _state = StateType.INIT;
     int _score = 0;
-    int _highScore = 0;
+    int _bestScore = 0;
     #endregion
 
     void Awake()
@@ -46,7 +51,9 @@ public class GameManager : MonoBehaviour
 
     void Update() {
         switch(_state) {
+            case StateType.INIT:
             case StateType.PAUSE:
+            case StateType.GAMEOVER:
                 Time.timeScale = 0;
                 break;
             case StateType.PLAY:
@@ -74,7 +81,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void Restart() {
-        _state = StateType.PAUSE;
+        _state = StateType.INIT;
 
         Roc.Init();
         GateRotator.Init();
@@ -87,12 +94,14 @@ public class GameManager : MonoBehaviour
     }
 
     public void GameOver() {
-        _state = StateType.PAUSE;
+        _state = StateType.GAMEOVER;
 
-        _highScore = (_score > _highScore) ? _score : _highScore;
+        _bestScore = (_score > _bestScore) ? _score : _bestScore;
 
         PlayView.Show(false);
         GameOverView.gameObject.SetActive(true);
+        GameOverView.SetScore(_score, _bestScore);
+        GameOverView.ShowMedal();
     }
 
     public void Quit() {
