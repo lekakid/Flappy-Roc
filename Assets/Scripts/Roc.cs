@@ -39,6 +39,7 @@ public class Roc : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         if(other.CompareTag("Wall")) {
+            SoundManager.Instance.Play("die");
             GameManager.Instance.GameOver();
         }
 

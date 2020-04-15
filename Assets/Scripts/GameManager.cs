@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
         GAMEOVER
     }
     static GameManager _instance;
+
     StateType _state = StateType.INIT;
     int _score = 0;
     int _bestScore = 0;
