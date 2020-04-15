@@ -48,6 +48,8 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         _instance = this;
+
+        Camera.main.orthographicSize = 3f * Screen.height / Screen.width;
     }
 
     void Update() {
