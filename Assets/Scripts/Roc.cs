@@ -32,8 +32,10 @@ public class Roc : MonoBehaviour
             GameManager.Instance.Play();
         }
 
-        if(GameManager.Instance.State == GameManager.StateType.PLAY)
+        if(GameManager.Instance.State == GameManager.StateType.PLAY) {
+            SoundManager.Instance.Play("jump");
             _rigidbody.velocity = Vector2.up * FlyForce;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)

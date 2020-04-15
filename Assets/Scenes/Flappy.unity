@@ -3388,7 +3388,7 @@ GameObject:
   - component: {fileID: 1545033492}
   - component: {fileID: 1545033494}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3440,7 +3440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioClips:
   - {fileID: 8300000, guid: 5280ecbf24cb9ad4ba41adc51ebd8a46, type: 3}
-  - {fileID: 8300000, guid: dd90104f99b556e4bb6867e06819852a, type: 3}
+  - {fileID: 8300000, guid: a20545a1f5c59cd4d92f4a97113c08eb, type: 3}
 --- !u!82 &1545033495
 AudioSource:
   m_ObjectHideFlags: 0
