@@ -91,6 +91,7 @@ public class GameManager : MonoBehaviour
         PlayView.SetScoreText(_score);
         PlayView.ShowLight(true);
 
+        PauseView.SetActive(false);
         GameOverView.gameObject.SetActive(false);
     }
 
