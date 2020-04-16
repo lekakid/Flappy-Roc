@@ -24,7 +24,7 @@ public class GateRotator : MonoBehaviour
                 if(g.isRunning)
                     continue;
 
-                g.SetGateHeight();
+                g.RandomizeGatePosition();
                 g.Run();
                 break;
             }

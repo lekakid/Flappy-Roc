@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class Gate : MonoBehaviour
 {
-    public GameObject UpSide;
-    public GameObject DownSide;
+    [Header("Object")]
+    public GameObject UpGate;
+    public GameObject DownGate;
+
+    [Header("Value")]
+    public float CeilingHeight = 10f;
+    public float BarrelMinHeight = 2f;
 
     public bool isRunning { 
         get {
@@ -13,24 +18,30 @@ public class Gate : MonoBehaviour
         }
     }
 
-    SpriteRenderer _upSideSpriteRenderer;
-    SpriteRenderer _downSideSpriteRenderer;
-    BoxCollider2D _upSideCollider;
-    BoxCollider2D _downSideCollider;
+    SpriteRenderer _upGateSpriteRenderer;
+    SpriteRenderer _downGateSpriteRenderer;
+    BoxCollider2D _upGateCollider;
+    BoxCollider2D _downGateCollider;
     BoxCollider2D _gateCollider;
 
     Vector2 _defaultPosition;
+    float _gateYMin;
+    float _gateYMax;
+
     bool _isRunning;
 
     void Awake()
     {
+        _upGateCollider = UpGate.GetComponent<BoxCollider2D>();
+        _downGateCollider = DownGate.GetComponent<BoxCollider2D>();
+        _upGateSpriteRenderer = UpGate.GetComponent<SpriteRenderer>();
+        _downGateSpriteRenderer = DownGate.GetComponent<SpriteRenderer>();
+        _gateCollider = GetComponent<BoxCollider2D>();
+
         _defaultPosition = transform.position;
 
-        _upSideCollider = UpSide.GetComponent<BoxCollider2D>();
-        _downSideCollider = DownSide.GetComponent<BoxCollider2D>();
-        _upSideSpriteRenderer = UpSide.GetComponent<SpriteRenderer>();
-        _downSideSpriteRenderer = DownSide.GetComponent<SpriteRenderer>();
-        _gateCollider = GetComponent<BoxCollider2D>();
+        _gateYMin = BarrelMinHeight + _gateCollider.size.y / 2f;
+        _gateYMax = CeilingHeight - BarrelMinHeight - _gateCollider.size.y / 2f;
     }
 
     // Update is called once per frame
@@ -39,7 +50,7 @@ public class Gate : MonoBehaviour
         if(_isRunning) {
             transform.position += (Vector3)(Vector2.left * GameManager.Instance.Roc.Speed * Time.deltaTime);
 
-            if(transform.position.x <= -1f) {
+            if(transform.localPosition.x <= 0) {
                 _isRunning = false;
                 transform.position = _defaultPosition;
             }
@@ -51,22 +62,20 @@ public class Gate : MonoBehaviour
         transform.position = _defaultPosition;
     }
 
-    public void SetGateHeight() {
-        float fullHeight = 10f;
-        float gateHeight = 2.5f;
+    public void RandomizeGatePosition() {
+        float gateYOffset = Random.Range(_gateYMin, _gateYMax);
+        _gateCollider.offset = new Vector2(_gateCollider.offset.x, gateYOffset);
 
-        float downSideHeight = Random.Range(2f, fullHeight - gateHeight - 2f);
-        float upSideHeight = fullHeight - gateHeight - downSideHeight;
+        float downHeight = _gateCollider.bounds.min.y;
+        float upHeight = CeilingHeight - _gateCollider.bounds.max.y;
 
-        DownSide.transform.position = new Vector2(DownSide.transform.position.x, downSideHeight / 2f);
-        _downSideCollider.size = new Vector2(_downSideCollider.size.x, downSideHeight);
-        _downSideSpriteRenderer.size = new Vector2(_downSideSpriteRenderer.size.x, downSideHeight);
+        DownGate.transform.position = new Vector2(DownGate.transform.position.x, downHeight / 2f);
+        _downGateCollider.size = new Vector2(_downGateCollider.size.x, downHeight - _downGateCollider.edgeRadius * 2f);
+        _downGateSpriteRenderer.size = new Vector2(_downGateSpriteRenderer.size.x, downHeight);
 
-        _gateCollider.offset = new Vector2(_gateCollider.offset.x, downSideHeight + gateHeight / 2f);
-
-        UpSide.transform.position = new Vector2(UpSide.transform.position.x, downSideHeight + gateHeight + upSideHeight / 2f);
-        _upSideCollider.size = new Vector2(_upSideCollider.size.x, upSideHeight);
-        _upSideSpriteRenderer.size = new Vector2(_upSideSpriteRenderer.size.x, upSideHeight);
+        UpGate.transform.position = new Vector2(UpGate.transform.position.x, CeilingHeight - upHeight / 2f);
+        _upGateCollider.size = new Vector2(_upGateCollider.size.x, upHeight - _upGateCollider.edgeRadius * 2f);
+        _upGateSpriteRenderer.size = new Vector2(_upGateSpriteRenderer.size.x, upHeight);
     }
 
     public void Run() {
