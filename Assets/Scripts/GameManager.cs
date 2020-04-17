@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
         INIT,
         PLAY,
         PAUSE,
+        RESUME,
         GAMEOVER
     }
     static GameManager _instance;
@@ -63,8 +64,6 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 1;
                 break;
         }
-
-        PlayView.SetScoreText(_score);
     }
 
     public void Play() {
@@ -79,8 +78,13 @@ public class GameManager : MonoBehaviour
     }
 
     public void Resume() {
-        _state = StateType.PLAY;
         PauseView.SetActive(false);
+        _state = StateType.RESUME;
+        PlayView.CountDown();
+    }
+
+    public void SetPlayState() {
+        _state = StateType.PLAY;
     }
 
     public void Restart() {
@@ -105,6 +109,7 @@ public class GameManager : MonoBehaviour
         PlayView.Show(false);
         GameOverView.gameObject.SetActive(true);
         GameOverView.SetScore(_score, _bestScore);
+        GameOverView.SetMissionClear();
         GameOverView.ShowMedal();
     }
 
@@ -114,5 +119,6 @@ public class GameManager : MonoBehaviour
 
     public void GetScore() {
         _score++;
+        PlayView.SetScoreText(_score);
     }
 }

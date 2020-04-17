@@ -8,6 +8,8 @@ public class GameOverView : MonoBehaviour
     public Text txtScore;
     public Text txtBestScore;
     public Image imgMedal;
+    public Image imgFail;
+    public Image imgClear;
 
     Animator animator;
 
@@ -20,6 +22,13 @@ public class GameOverView : MonoBehaviour
         if(GameManager.Instance.Score >= GameManager.Instance.MedalScore) {
             imgMedal.enabled = true;
         }
+    }
+
+    public void SetMissionClear() {
+        bool result = GameManager.Instance.Score >= GameManager.Instance.MedalScore;
+
+        imgFail.enabled = !result;
+        imgClear.enabled = result;
     }
 
     public void SetScore(int Score, int BestScore) {
